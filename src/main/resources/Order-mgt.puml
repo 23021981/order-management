@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+Postman -> BookOrderController: Send GET/PUT/POST/DELETE request
+BookOrderController -> BookOrderService: Invoke service layer
+BookOrderService -> BookOrderRepository: Invoke repository layer
+BookOrderRepository -> H2DB: Perform crud operation on H2 data base.
+
+
+H2DB <- BookOrderRepository: Return the data from Data base
+BookOrderRepository <- BookOrderService: Repository layer send data to service layer
+BookOrderService <- BookOrderController: Service layer send data to controller
+BookOrderController <- Postman: Response return to Postman
+@enduml
